@@ -1,4 +1,6 @@
-FROM ubuntu:14.04
+FROM node:6.10.2
+
+USER root
 
 LABEL maintainer "Alpeware <info@alpeware.com>"
 
@@ -21,8 +23,9 @@ RUN google-chrome-unstable --version
 
 ADD start.sh import_cert.sh /usr/bin/
 
-RUN mkdir /data
-VOLUME /data
-ENV HOME=/data DEBUG_ADDRESS=0.0.0.0 DEBUG_PORT=9222
+#RUN mkdir /data
+VOLUME /home/node/
+ENV HOME=/home/node DEBUG_ADDRESS=0.0.0.0 DEBUG_PORT=9222
 
+USER node
 CMD ["/usr/bin/start.sh"]
